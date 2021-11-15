@@ -34,7 +34,7 @@ namespace WindowsFormsApp1
             // 
             // panelTabla
             // 
-            this.panelTabla.BackColor = System.Drawing.Color.Maroon;
+            this.panelTabla.BackColor = System.Drawing.Color.MediumOrchid;
             this.panelTabla.Location = new System.Drawing.Point(53, 21);
             this.panelTabla.Name = "panelTabla";
             this.panelTabla.Size = new System.Drawing.Size(240, 400);
@@ -50,6 +50,7 @@ namespace WindowsFormsApp1
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
 
         }
