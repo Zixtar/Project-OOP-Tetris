@@ -29,8 +29,8 @@ namespace WindowsFormsApp1
         }
 
         private TablaDeJoc _tabla1;
-        const int PIXELIPEPATRAT = 16;
-        const int LATIME = 15;
+        const int PIXELIPEPATRAT = 18;
+        const int LATIME = 10;
         const int INALTIME = 20;
         ObiectCazator ObiectCurent;
         private void Form1_Load(object sender, EventArgs e)
@@ -100,6 +100,13 @@ namespace WindowsFormsApp1
                     _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ref ObiectCurent.coordCentruX, ref ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime, -1, 0);
                 if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
                     _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ref ObiectCurent.coordCentruX, ref ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime, 1, 0);
+                if (e.KeyCode == Keys.Space)
+                    while(_tabla1.arePiesa)
+                        _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ref ObiectCurent.coordCentruX, ref ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime, 0, 1);
+                if (e.KeyCode == Keys.R)
+                {
+                    _tabla1.Rotire(ObiectCurent); 
+                }
                 panelTabla.Refresh();
             }
         }

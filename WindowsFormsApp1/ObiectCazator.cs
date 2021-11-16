@@ -16,13 +16,40 @@ namespace WindowsFormsApp1
         PIESA_L,
         PIESA_I
     }
-    public abstract class ObiectCazator
+    public abstract class ObiectCazator: ICloneable
     {
         public int coordCentruX;
         public int coordCentruY;
         public int latime;
         public int inaltime;
         public int[,] MatriceForma;
+        public ObiectCazator Rotire()
+        {
+            int[,] matrice90Grade = new int[latime, inaltime];
+            int continaltime90Grade = 0;
+            int contlatime90Grade = 0;
+            int continaltimeForma = inaltime - 1;
+            int contlatimeForma = 0;
+            for (; contlatimeForma < latime; contlatimeForma++, continaltime90Grade++)
+            {
+                for (; continaltimeForma >= 0; continaltimeForma--, contlatime90Grade++)
+                {
+                    matrice90Grade[continaltime90Grade, contlatime90Grade] = MatriceForma[continaltimeForma, contlatimeForma];
+
+                }
+                contlatime90Grade = 0;
+                continaltimeForma = inaltime - 1;
+            }
+            latime = matrice90Grade.GetLength(1);
+            inaltime = matrice90Grade.GetLength(0);
+            MatriceForma = new int[matrice90Grade.GetLength(1), matrice90Grade.GetLength(0)];
+            MatriceForma = matrice90Grade;
+            return this;
+        }
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 
     public class PiesaO : ObiectCazator

@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
         public int Heigth;
         public int[,] MatriceLogicaTablaDeJoc;
         public bool arePiesa;
+        private int[,] RandComplet;
         public
 
         TablaDeJoc(int Latime, int Inaltime)
@@ -20,6 +21,11 @@ namespace WindowsFormsApp1
             Width = Latime;
             Heigth = Inaltime;
             MatriceLogicaTablaDeJoc = new int[Heigth, Width];
+            RandComplet = new int[1, Width];
+            for (int i = 0; i < Width; i++)
+            {
+                RandComplet[0, i] = 1;
+            }
         }
         // functie pentru miscarea obiectelor pe tabla
         public void ModificareTabla(int[,] Obiect, ref int coordX, ref int coordY, int latimeObiect, int inaltimeObiect, int miscareOrizontala, int miscareVerticala)
@@ -27,9 +33,10 @@ namespace WindowsFormsApp1
             if ((coordX + miscareOrizontala >= 0) && (coordX + miscareOrizontala + latimeObiect <= Width)
                 && !CevaMargine(Obiect, coordX, coordY, latimeObiect, inaltimeObiect, miscareOrizontala, miscareVerticala))  // verificare atingere margini
             {
-                if ((coordY + inaltimeObiect == Heigth)
+                if (((coordY + inaltimeObiect == Heigth) && miscareVerticala > 0)
                     || CevaSub(Obiect, coordX, coordY, latimeObiect, inaltimeObiect, miscareOrizontala, miscareVerticala)) //verificare conditie de oprire
                 {
+                    VerificareLiniiComplete(coordY, inaltimeObiect);
                     arePiesa = false;
                 }
                 else
@@ -62,6 +69,16 @@ namespace WindowsFormsApp1
                 }
             }
             arePiesa = true;
+        }
+
+        public void Rotire(ObiectCazator obiect)
+        {
+            if (VerificareRotire(obiect))
+            {
+                StergereObiect(obiect.MatriceForma, obiect.coordCentruX, obiect.coordCentruY, obiect.latime, obiect.inaltime);
+                obiect = obiect.Rotire();
+                ModificareTabla(obiect.MatriceForma, obiect.coordCentruX, obiect.coordCentruY, obiect.latime, obiect.inaltime);
+            }
         }
 
         private bool CevaMargine(int[,] Obiect, int coordX, int coordY, int latimeObiect, int inaltimeObiect, int miscareOrizontala, int miscareVerticala)
@@ -107,6 +124,31 @@ namespace WindowsFormsApp1
             ModificareTabla(Obiect, coordX, coordY, latimeObiect, inaltimeObiect);
             return false;
         }
+
+        private bool VerificareRotire(ObiectCazator obiect)
+        {
+            ObiectCazator obiect2 = (ObiectCazator)obiect.Clone();
+            obiect2.Rotire();
+            if (obiect2.coordCentruX + obiect2.latime > Width
+            || obiect2.coordCentruY + obiect2.inaltime > Heigth)
+                return false;
+            StergereObiect(obiect.MatriceForma, obiect.coordCentruX, obiect.coordCentruY, obiect.latime, obiect.inaltime);
+            for (int i=obiect2.coordCentruY;i<obiect2.coordCentruY+obiect2.inaltime;i++)
+            {
+                for(int j=obiect2.coordCentruX;j<obiect2.coordCentruX+obiect2.latime;j++)
+                {
+                    var tempX = j - obiect2.coordCentruX;
+                    var tempY = i - obiect2.coordCentruY;
+                    if (obiect2.MatriceForma[tempY, tempX] == 1 && MatriceLogicaTablaDeJoc[i, j] == 1)
+                    {
+                        ModificareTabla(obiect.MatriceForma, obiect.coordCentruX, obiect.coordCentruY, obiect.latime, obiect.inaltime);
+                        return false;
+                    }
+                }
+            }
+            ModificareTabla(obiect.MatriceForma, obiect.coordCentruX, obiect.coordCentruY, obiect.latime, obiect.inaltime);
+            return true;
+        }
         private void StergereObiect(int[,] Obiect, int coordX, int coordY, int latimeObiect, int inaltimeObiect)
         {
             for (int i = coordY; i < coordY + inaltimeObiect; i++)
@@ -118,10 +160,36 @@ namespace WindowsFormsApp1
                         MatriceLogicaTablaDeJoc[i, j] = 0;
                 }
         }
-        private void VerificareLiniiComplete()
+        private void VerificareLiniiComplete(int coordY, int inaltimeObiect)
         {
+            int[] randurieliminate = new int[inaltimeObiect];
+            for (int i = coordY; i < inaltimeObiect + coordY; i++)
+            {
+                bool complet = true;
+
+                for (int j = 0; j < Width; j++)
+                    if (MatriceLogicaTablaDeJoc[i, j] == 0)
+                    {
+                        complet = false;
+                        break;
+                    }
+                if (complet)
+                {
+                    randurieliminate[i - coordY] = 1;
+                    StergereObiect(RandComplet, 0, i, RandComplet.Length, 1);
+                    CoborareRanduri(i, 1);
+                }
+            }
 
         }
-
+        private void CoborareRanduri(int coordY, int nrRanduri)
+        {
+            for (int i = coordY; i > 0; i--)
+                for (int j = 0; j < Width; j++)
+                    MatriceLogicaTablaDeJoc[i, j] = MatriceLogicaTablaDeJoc[i - nrRanduri, j];
+            for (int i = 0; i < nrRanduri; i++)
+                for (int j = 0; j < Width; j++)
+                    MatriceLogicaTablaDeJoc[i, j] = 0;
+        }
     }
 }
