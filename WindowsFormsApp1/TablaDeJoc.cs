@@ -191,5 +191,26 @@ namespace WindowsFormsApp1
                 for (int j = 0; j < Width; j++)
                     MatriceLogicaTablaDeJoc[i, j] = 0;
         }
+        public void CurataTabla()
+        {
+            MatriceLogicaTablaDeJoc = new int[Heigth, Width];
+        }
+
+        public bool PiesaAreLoc(ObiectCazator obiect)
+        {
+            for (int i = obiect.coordCentruY; i < obiect.coordCentruY + obiect.inaltime; i++)
+            {
+                for (int j = obiect.coordCentruX; j < obiect.coordCentruX + obiect.latime; j++)
+                {
+                    var tempX = j - obiect.coordCentruX;
+                    var tempY = i - obiect.coordCentruY;
+                    if (obiect.MatriceForma[tempY, tempX] == 1 && MatriceLogicaTablaDeJoc[i, j] == 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

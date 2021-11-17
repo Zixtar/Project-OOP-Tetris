@@ -84,7 +84,10 @@ namespace WindowsFormsApp1
                         ObiectCurent = new PiesaI(LATIME / 2, 0);
                         break;
                 }
-                _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ObiectCurent.coordCentruX, ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime);
+                if (_tabla1.PiesaAreLoc(ObiectCurent))
+                    _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ObiectCurent.coordCentruX, ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime);
+                else
+                    _tabla1.CurataTabla();
             }
             else
                 _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ref ObiectCurent.coordCentruX, ref ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime, 0, 1);
