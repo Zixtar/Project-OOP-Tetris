@@ -9,8 +9,8 @@ namespace WindowsFormsApp1
     class TablaAlegere
     {
         public panelPiesa[] sirPanels = new panelPiesa[3];
-        int Width;
-        int Heigth;
+        public int Width;
+        public int Heigth;
         public struct panelPiesa 
         {
             public int coordX;
@@ -29,7 +29,6 @@ namespace WindowsFormsApp1
             for(int i=0;i<sirPanels.Length;i++)
                 sirPanels[i].coordY = 3;
             PieseRandom();
-            
         }
         public void PieseRandom()
         {

@@ -65,6 +65,11 @@ namespace WindowsFormsApp1
             coordCentruX = x;
             coordCentruY = y;
         }
+        override
+        public string ToString()
+        {
+            return ((int)Forme.PIESA_O).ToString(); 
+        }
     }
     public class PiesaT : ObiectCazator
     {
@@ -77,6 +82,11 @@ namespace WindowsFormsApp1
             inaltime = MatriceForma.GetLength(0);
             coordCentruX = x;
             coordCentruY = y;
+        }
+        override
+        public string ToString()
+        {
+            return ((int)Forme.PIESA_T).ToString();
         }
     }
 
@@ -94,6 +104,11 @@ namespace WindowsFormsApp1
             coordCentruX = x;
             coordCentruY = y;
         }
+        override
+        public string ToString()
+        {
+            return ((int)Forme.PIESA_I).ToString();
+        }
     }
 
     public class PiesaZ : ObiectCazator
@@ -107,6 +122,11 @@ namespace WindowsFormsApp1
             inaltime = MatriceForma.GetLength(0);
             coordCentruX = x;
             coordCentruY = y;
+        }
+        override
+        public string ToString()
+        {
+            return ((int)Forme.PIESA_Z).ToString();
         }
     }
 
@@ -122,6 +142,11 @@ namespace WindowsFormsApp1
             coordCentruX = x;
             coordCentruY = y;
         }
+        override
+        public string ToString()
+        {
+            return ((int)Forme.PIESA_S).ToString();
+        }
     }
 
     public class PiesaL : ObiectCazator
@@ -136,6 +161,11 @@ namespace WindowsFormsApp1
             coordCentruX = x;
             coordCentruY = y;
         }
+        override
+        public string ToString()
+        {
+            return ((int)Forme.PIESA_L).ToString();
+        }
     }
 
     public class PiesaJ : ObiectCazator
@@ -149,6 +179,11 @@ namespace WindowsFormsApp1
             inaltime = MatriceForma.GetLength(0);
             coordCentruX = x;
             coordCentruY = y;
+        }
+        override
+        public string ToString()
+        {
+            return ((int)Forme.PIESA_J).ToString();
         }
     }
 }

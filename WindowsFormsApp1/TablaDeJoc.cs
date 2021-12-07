@@ -14,6 +14,8 @@ namespace WindowsFormsApp1
         public int[,] MatriceLogicaTablaDeJoc;
         public bool arePiesa;
         private int[,] RandComplet;
+        public int CurrentMaxH = 0;  //Inaltime maxima player1 pt desenare tabla player2
+        public int score = 0;
         public
 
         TablaDeJoc(int Latime, int Inaltime)
@@ -184,6 +186,8 @@ namespace WindowsFormsApp1
         }
         private void CoborareRanduri(int coordY, int nrRanduri)
         {
+            CurrentMaxH--;
+            score++;
             for (int i = coordY; i > 0; i--)
                 for (int j = 0; j < Width; j++)
                     MatriceLogicaTablaDeJoc[i, j] = MatriceLogicaTablaDeJoc[i - nrRanduri, j];
@@ -194,6 +198,7 @@ namespace WindowsFormsApp1
         public void CurataTabla()
         {
             MatriceLogicaTablaDeJoc = new int[Heigth, Width];
+            CurrentMaxH = 0;
         }
 
         public bool PiesaAreLoc(ObiectCazator obiect)

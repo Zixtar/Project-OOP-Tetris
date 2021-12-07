@@ -34,7 +34,14 @@ namespace WindowsFormsApp1
             this.panelPiesa3 = new System.Windows.Forms.Panel();
             this.panelPiesa2 = new System.Windows.Forms.Panel();
             this.panelPiesa1 = new System.Windows.Forms.Panel();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.textConnect = new System.Windows.Forms.TextBox();
+            this.labelScore = new System.Windows.Forms.Label();
+            this.player1Score = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.volumeLabel = new System.Windows.Forms.Label();
             this.panelAlegere.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTabla
@@ -61,7 +68,8 @@ namespace WindowsFormsApp1
             // 
             // panelPiesa3
             // 
-            this.panelPiesa3.Location = new System.Drawing.Point(189, 36);
+            this.panelPiesa3.Enabled = false;
+            this.panelPiesa3.Location = new System.Drawing.Point(189, 37);
             this.panelPiesa3.Name = "panelPiesa3";
             this.panelPiesa3.Size = new System.Drawing.Size(48, 55);
             this.panelPiesa3.TabIndex = 2;
@@ -69,6 +77,7 @@ namespace WindowsFormsApp1
             // 
             // panelPiesa2
             // 
+            this.panelPiesa2.Enabled = false;
             this.panelPiesa2.Location = new System.Drawing.Point(116, 34);
             this.panelPiesa2.Name = "panelPiesa2";
             this.panelPiesa2.Size = new System.Drawing.Size(53, 58);
@@ -77,17 +86,83 @@ namespace WindowsFormsApp1
             // 
             // panelPiesa1
             // 
+            this.panelPiesa1.Enabled = false;
             this.panelPiesa1.Location = new System.Drawing.Point(47, 41);
             this.panelPiesa1.Name = "panelPiesa1";
             this.panelPiesa1.Size = new System.Drawing.Size(54, 52);
             this.panelPiesa1.TabIndex = 0;
             this.panelPiesa1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelPiesa1_MouseClick);
             // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(246, 147);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(96, 31);
+            this.btnConnect.TabIndex = 3;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // textConnect
+            // 
+            this.textConnect.Location = new System.Drawing.Point(246, 101);
+            this.textConnect.Name = "textConnect";
+            this.textConnect.Size = new System.Drawing.Size(96, 20);
+            this.textConnect.TabIndex = 4;
+            this.textConnect.Text = "127.0.0.1";
+            // 
+            // labelScore
+            // 
+            this.labelScore.AutoSize = true;
+            this.labelScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelScore.Location = new System.Drawing.Point(243, 34);
+            this.labelScore.Name = "labelScore";
+            this.labelScore.Size = new System.Drawing.Size(44, 13);
+            this.labelScore.TabIndex = 5;
+            this.labelScore.Text = "Score:";
+            // 
+            // player1Score
+            // 
+            this.player1Score.AutoSize = true;
+            this.player1Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.player1Score.Location = new System.Drawing.Point(286, 34);
+            this.player1Score.Name = "player1Score";
+            this.player1Score.Size = new System.Drawing.Size(14, 13);
+            this.player1Score.TabIndex = 6;
+            this.player1Score.Text = "0";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.LargeChange = 10;
+            this.trackBar1.Location = new System.Drawing.Point(440, 34);
+            this.trackBar1.Maximum = 40;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(132, 45);
+            this.trackBar1.TabIndex = 7;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar1.Value = 20;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // volumeLabel
+            // 
+            this.volumeLabel.AutoSize = true;
+            this.volumeLabel.Location = new System.Drawing.Point(469, 17);
+            this.volumeLabel.Name = "volumeLabel";
+            this.volumeLabel.Size = new System.Drawing.Size(73, 13);
+            this.volumeLabel.TabIndex = 8;
+            this.volumeLabel.Text = "Music Volume";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 390);
+            this.Controls.Add(this.volumeLabel);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.player1Score);
+            this.Controls.Add(this.labelScore);
+            this.Controls.Add(this.textConnect);
+            this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.panelAlegere);
             this.Controls.Add(this.panelTabla);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -96,7 +171,9 @@ namespace WindowsFormsApp1
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.panelAlegere.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -107,6 +184,12 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Panel panelPiesa3;
         private System.Windows.Forms.Panel panelPiesa2;
         private System.Windows.Forms.Panel panelPiesa1;
+        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.TextBox textConnect;
+        private System.Windows.Forms.Label labelScore;
+        private System.Windows.Forms.Label player1Score;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label volumeLabel;
     }
 }
 
