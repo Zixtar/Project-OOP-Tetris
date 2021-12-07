@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{5FB4A6BA-BC66-4B80-8CDA-5B1C06354F3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server_Tetris", "Server_Tetris\Server_Tetris.csproj", "{3589C0F9-3672-44DF-9735-E49FD3FD4347}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5FB4A6BA-BC66-4B80-8CDA-5B1C06354F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FB4A6BA-BC66-4B80-8CDA-5B1C06354F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FB4A6BA-BC66-4B80-8CDA-5B1C06354F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3589C0F9-3672-44DF-9735-E49FD3FD4347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3589C0F9-3672-44DF-9735-E49FD3FD4347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3589C0F9-3672-44DF-9735-E49FD3FD4347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3589C0F9-3672-44DF-9735-E49FD3FD4347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
