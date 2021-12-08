@@ -391,6 +391,9 @@ namespace WindowsFormsApp1
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
+            try
+            {
+
             contor++;
             System.Net.IPAddress ip = System.Net.IPAddress.Parse(textConnect.Text);
             client = new TcpClient(textConnect.Text, 3000);
@@ -411,6 +414,11 @@ namespace WindowsFormsApp1
                 StreamWriter scriere = new StreamWriter(DateClient);
                 scriere.AutoFlush = true;
                 scriere.WriteLine("C");
+            }
+            }
+            catch
+            {
+                MessageBox.Show("Couldn't connect to server");
             }
         }
 
