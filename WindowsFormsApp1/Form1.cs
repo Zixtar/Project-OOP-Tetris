@@ -91,7 +91,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             formXYZ = this;
             musicPLY.Open(new Uri(@"Tetris.wav", UriKind.Relative));
-            musicPLY.Volume = 0.2;
+            musicPLY.Volume = 0 ;
             musicPLY.Play();
             musicPLY.MediaEnded += Media_Ended;
         }
@@ -117,16 +117,18 @@ namespace WindowsFormsApp1
         const int INALTIME_ALEGERE = 8;
         ObiectCazator ObiectCurent;
         ObiectCazator NextPiesa = null;
+       
         private void Form1_Load(object sender, EventArgs e)
         {
             //  BitmapTabla = new Bitmap(picBoxTabla.Width, picBoxTabla.Height);
-            panelTabla.Width = LATIME * PIXELIPEPATRAT;
-            panelTabla.Height = INALTIME * PIXELIPEPATRAT;
+            (panelTab as Control).KeyDown += Form1_KeyDown;
+           panelTab.Width = LATIME * PIXELIPEPATRAT;
+            panelTab.Height = INALTIME * PIXELIPEPATRAT;
             panelAlegere.Width = LATIME_ALEGERE * PIXELIPEPATRAT;
             panelAlegere.Height = INALTIME_ALEGERE * PIXELIPEPATRAT;
             typeof(Panel).InvokeMember("DoubleBuffered",                                  //magie ce scoate flickering-ul
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-            null, panelTabla, new object[] { true });
+            null, panelTab, new object[] { true });
             typeof(Panel).InvokeMember("DoubleBuffered",
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
             null, panelAlegere, new object[] { true });                                   ///////////////////////////////
@@ -136,7 +138,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void panelTabla_Paint(object sender, PaintEventArgs e)
+        private void panelTab_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             if (player == 1)
@@ -223,7 +225,7 @@ namespace WindowsFormsApp1
                 else
                     _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ref ObiectCurent.coordCentruX, ref ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime, 0, 1);
 
-                panelTabla.Invalidate();
+                panelTab.Invalidate();
             }
             if (player == 2)
             {
@@ -233,7 +235,7 @@ namespace WindowsFormsApp1
                     panelAlegere.Invalidate();
                     DatePrimite = null;
                 }
-                panelTabla.Invalidate();
+                panelTab.Invalidate();
             }
         }
 
@@ -282,7 +284,7 @@ namespace WindowsFormsApp1
                 {
                     _tabla1.Rotire(ObiectCurent);
                 }
-                panelTabla.Invalidate();
+                panelTab.Invalidate();
             }
         }
 
@@ -382,7 +384,7 @@ namespace WindowsFormsApp1
             SetTimer();
             textConnect.Visible = false;
             textConnect.Enabled = false;
-            this.Focus();
+            panelTab.Focus();
             btnConnect.Visible = false;
             if (player == 2)
             {
@@ -398,6 +400,12 @@ namespace WindowsFormsApp1
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             musicPLY.Volume = trackBar1.Value / 100f;
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelTab.Focus();
+            //this.Select();
         }
     }
 }

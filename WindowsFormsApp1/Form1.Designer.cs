@@ -29,7 +29,6 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelTabla = new System.Windows.Forms.Panel();
             this.panelAlegere = new System.Windows.Forms.Panel();
             this.panelPiesa3 = new System.Windows.Forms.Panel();
             this.panelPiesa2 = new System.Windows.Forms.Panel();
@@ -40,19 +39,10 @@ namespace WindowsFormsApp1
             this.player1Score = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.volumeLabel = new System.Windows.Forms.Label();
+            this.panelTab = new WindowsFormsApp1.SelectablePanel();
             this.panelAlegere.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panelTabla
-            // 
-            this.panelTabla.BackColor = System.Drawing.Color.MediumOrchid;
-            this.panelTabla.Location = new System.Drawing.Point(40, 17);
-            this.panelTabla.Margin = new System.Windows.Forms.Padding(2);
-            this.panelTabla.Name = "panelTabla";
-            this.panelTabla.Size = new System.Drawing.Size(180, 325);
-            this.panelTabla.TabIndex = 1;
-            this.panelTabla.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTabla_Paint);
             // 
             // panelAlegere
             // 
@@ -140,7 +130,6 @@ namespace WindowsFormsApp1
             this.trackBar1.Size = new System.Drawing.Size(132, 45);
             this.trackBar1.TabIndex = 7;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar1.Value = 20;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // volumeLabel
@@ -152,11 +141,22 @@ namespace WindowsFormsApp1
             this.volumeLabel.TabIndex = 8;
             this.volumeLabel.Text = "Music Volume";
             // 
+            // panelTab
+            // 
+            this.panelTab.BackColor = System.Drawing.Color.MediumOrchid;
+            this.panelTab.Location = new System.Drawing.Point(23, 17);
+            this.panelTab.Name = "panelTab";
+            this.panelTab.Size = new System.Drawing.Size(197, 313);
+            this.panelTab.TabIndex = 9;
+            this.panelTab.TabStop = true;
+            this.panelTab.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTab_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 390);
+            this.Controls.Add(this.panelTab);
             this.Controls.Add(this.volumeLabel);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.player1Score);
@@ -164,12 +164,11 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.textConnect);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.panelAlegere);
-            this.Controls.Add(this.panelTabla);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.panelAlegere.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
@@ -178,8 +177,6 @@ namespace WindowsFormsApp1
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panelTabla;
         private System.Windows.Forms.Panel panelAlegere;
         private System.Windows.Forms.Panel panelPiesa3;
         private System.Windows.Forms.Panel panelPiesa2;
@@ -190,6 +187,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label player1Score;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label volumeLabel;
+        private SelectablePanel panelTab;
     }
 }
 
