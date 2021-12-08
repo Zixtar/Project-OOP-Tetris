@@ -54,6 +54,7 @@ namespace WindowsFormsApp1
         public panelPiesa[] sirPanels = new panelPiesa[3];
         public int Width;
         public int Heigth;
+        public int selectat;
         public struct panelPiesa 
         {
             public int coordX;
@@ -75,6 +76,7 @@ namespace WindowsFormsApp1
         }
         public void PieseRandom()
         {
+            selectat = -1;
              Random rnd = new Random();
             for(int i = 0; i < 3; i++) 
             { 

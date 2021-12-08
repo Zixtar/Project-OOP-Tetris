@@ -26,6 +26,16 @@ namespace WindowsFormsApp1
         Form1 formXYZ;
         System.Windows.Media.MediaPlayer musicPLY = new System.Windows.Media.MediaPlayer();
 
+        protected override CreateParams CreateParams   //magie ce scoate flickering-ul
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+
+                return cp;
+            }
+        }
         void PrimireDinServer()
         {
             StreamReader citire = new StreamReader(DateClient);
@@ -126,12 +136,6 @@ namespace WindowsFormsApp1
             panelTab.Height = INALTIME * PIXELIPEPATRAT;
             panelAlegere.Width = LATIME_ALEGERE * PIXELIPEPATRAT;
             panelAlegere.Height = INALTIME_ALEGERE * PIXELIPEPATRAT;
-            typeof(Panel).InvokeMember("DoubleBuffered",                                  //magie ce scoate flickering-ul
-            BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-            null, panelTab, new object[] { true });
-            typeof(Panel).InvokeMember("DoubleBuffered",
-            BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-            null, panelAlegere, new object[] { true });                                   ///////////////////////////////
             if (player == 1)
             {
                 _tabla1 = new TablaDeJoc(LATIME, INALTIME);
@@ -301,19 +305,26 @@ namespace WindowsFormsApp1
             if (player == 2)
             {
                 for (int k = 0; k < 3; k++)
+                {
+                    Color culoare = new Color();
+                    if (k == _tabla2.selectat)
+                        culoare = Color.Red;
+                    else
+                        culoare = Color.Gray;
                     for (int i = 0; i < 4; i++)
                         for (int j = 0; j < 3; j++)
                         {
                             g.FillRectangle(Brushes.White, (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT, PIXELIPEPATRAT, PIXELIPEPATRAT);
                             if (i == 0)
-                                g.DrawLine(new Pen(Color.Gray, 2), (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT);
+                                g.DrawLine(new Pen(culoare, 2), (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT);
                             if (i == 3)
-                                g.DrawLine(new Pen(Color.Gray, 2), (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT + PIXELIPEPATRAT);
+                                g.DrawLine(new Pen(culoare, 2), (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT + PIXELIPEPATRAT);
                             if (j == 0)
-                                g.DrawLine(new Pen(Color.Gray, 2), (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT + PIXELIPEPATRAT);
+                                g.DrawLine(new Pen(culoare, 2), (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT + PIXELIPEPATRAT);
                             if (j == 2)
-                                g.DrawLine(new Pen(Color.Gray, 2), (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT + PIXELIPEPATRAT);
+                                g.DrawLine(new Pen(culoare, 2), (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordX + j) * PIXELIPEPATRAT + PIXELIPEPATRAT, (_tabla2.sirPanels[k].coordY + i) * PIXELIPEPATRAT + PIXELIPEPATRAT);
                         }
+                }
                 for (int k = 0; k < 3; k++)
                     for (int i = 0; i < _tabla2.sirPanels[k].OC.inaltime; i++)
                         for (int j = 0; j < _tabla2.sirPanels[k].OC.latime; j++)
@@ -341,6 +352,8 @@ namespace WindowsFormsApp1
                 StreamWriter scriere = new StreamWriter(DateClient);
                 scriere.AutoFlush = true;
                 scriere.WriteLine("P" + _tabla2.sirPanels[0].OC.ToString());
+                _tabla2.selectat = 0;
+                panelAlegere.Invalidate();
             }
             finally { }
         }
@@ -352,6 +365,8 @@ namespace WindowsFormsApp1
                 StreamWriter scriere = new StreamWriter(DateClient);
                 scriere.AutoFlush = true;
                 scriere.WriteLine("P" + _tabla2.sirPanels[1].OC.ToString());
+                _tabla2.selectat = 1;
+                panelAlegere.Invalidate();
             }
             finally { }
         }
@@ -363,6 +378,8 @@ namespace WindowsFormsApp1
                 StreamWriter scriere = new StreamWriter(DateClient);
                 scriere.AutoFlush = true;
                 scriere.WriteLine("P" + _tabla2.sirPanels[2].OC.ToString());
+                _tabla2.selectat = 2;
+                panelAlegere.Invalidate();
             }
             finally { }
         }
