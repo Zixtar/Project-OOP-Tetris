@@ -97,11 +97,11 @@ namespace WindowsFormsApp1
         }
         public Form1()
         {
-            
+
             InitializeComponent();
             formXYZ = this;
             musicPLY.Open(new Uri(@"Tetris.wav", UriKind.Relative));
-            musicPLY.Volume = 0 ;
+            musicPLY.Volume = 0;
             musicPLY.Play();
             musicPLY.MediaEnded += Media_Ended;
         }
@@ -120,19 +120,23 @@ namespace WindowsFormsApp1
 
         private TablaDeJoc _tabla1;     //variabile ce tin de jocul local
         private TablaAlegere _tabla2;
-        const int PIXELIPEPATRAT = 18;
+        int PIXELIPEPATRAT = 18;  //casplock deoarece era const inainte de adaugarea compatibilitatii pt scaling
         const int LATIME = 10;
         const int INALTIME = 20;
         const int LATIME_ALEGERE = 13;
         const int INALTIME_ALEGERE = 8;
+
         ObiectCazator ObiectCurent;
         ObiectCazator NextPiesa = null;
-       
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            int procentaj = (int)(100 * Screen.PrimaryScreen.Bounds.Width / System.Windows.SystemParameters.PrimaryScreenWidth);
+            PIXELIPEPATRAT = procentaj * PIXELIPEPATRAT / 100;
             //  BitmapTabla = new Bitmap(picBoxTabla.Width, picBoxTabla.Height);
             (panelTab as Control).KeyDown += Form1_KeyDown;
-           panelTab.Width = LATIME * PIXELIPEPATRAT;
+            panelTab.Width = LATIME * PIXELIPEPATRAT;
+
             panelTab.Height = INALTIME * PIXELIPEPATRAT;
             panelAlegere.Width = LATIME_ALEGERE * PIXELIPEPATRAT;
             panelAlegere.Height = INALTIME_ALEGERE * PIXELIPEPATRAT;
@@ -394,27 +398,27 @@ namespace WindowsFormsApp1
             try
             {
 
-            contor++;
-            System.Net.IPAddress ip = System.Net.IPAddress.Parse(textConnect.Text);
-            client = new TcpClient(textConnect.Text, 3000);
-            DateClient = client.GetStream();
-            btnConnect.Enabled = false;
-            threadClient = new Thread(new ThreadStart(PrimireDinServer));
-            threadClient.Start();
-            SetTimer();
-            textConnect.Visible = false;
-            textConnect.Enabled = false;
-            panelTab.Focus();
-            btnConnect.Visible = false;
-            if (player == 2)
-            {
-                _tabla2 = new TablaAlegere(LATIME_ALEGERE, INALTIME_ALEGERE, PIXELIPEPATRAT);
-                initializarePanels();
-                panelPiesa1.Enabled = panelPiesa2.Enabled = panelPiesa3.Enabled = true;
-                StreamWriter scriere = new StreamWriter(DateClient);
-                scriere.AutoFlush = true;
-                scriere.WriteLine("C");
-            }
+                contor++;
+                System.Net.IPAddress ip = System.Net.IPAddress.Parse(textConnect.Text);
+                client = new TcpClient(textConnect.Text, 3000);
+                DateClient = client.GetStream();
+                btnConnect.Enabled = false;
+                threadClient = new Thread(new ThreadStart(PrimireDinServer));
+                threadClient.Start();
+                SetTimer();
+                textConnect.Visible = false;
+                textConnect.Enabled = false;
+                panelTab.Focus();
+                btnConnect.Visible = false;
+                if (player == 2)
+                {
+                    _tabla2 = new TablaAlegere(LATIME_ALEGERE, INALTIME_ALEGERE, PIXELIPEPATRAT);
+                    initializarePanels();
+                    panelPiesa1.Enabled = panelPiesa2.Enabled = panelPiesa3.Enabled = true;
+                    StreamWriter scriere = new StreamWriter(DateClient);
+                    scriere.AutoFlush = true;
+                    scriere.WriteLine("C");
+                }
             }
             catch
             {
