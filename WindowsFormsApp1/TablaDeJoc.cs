@@ -187,7 +187,7 @@ namespace WindowsFormsApp1
         private void CoborareRanduri(int coordY, int nrRanduri)
         {
             CurrentMaxH--;
-            score++;
+            score+=100;
             for (int i = coordY; i > 0; i--)
                 for (int j = 0; j < Width; j++)
                     MatriceLogicaTablaDeJoc[i, j] = MatriceLogicaTablaDeJoc[i - nrRanduri, j];

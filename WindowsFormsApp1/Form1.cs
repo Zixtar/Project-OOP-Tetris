@@ -286,9 +286,12 @@ namespace WindowsFormsApp1
                 if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
                     _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ref ObiectCurent.coordCentruX, ref ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime, 1, 0);
                 if (e.KeyCode == Keys.Space)
+                {
+                    _tabla1.score += 5;
                     while (_tabla1.arePiesa)
                         _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ref ObiectCurent.coordCentruX, ref ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime, 0, 1);
-                if (e.KeyCode == Keys.R)
+                }
+                    if (e.KeyCode == Keys.R)
                 {
                     _tabla1.Rotire(ObiectCurent);
                 }
@@ -435,6 +438,12 @@ namespace WindowsFormsApp1
         {
             panelTab.Focus();
             //this.Select();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(client !=null && client.Connected)
+                client.Close();
         }
     }
 }
