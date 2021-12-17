@@ -413,6 +413,8 @@ namespace WindowsFormsApp1
                 textConnect.Enabled = false;
                 panelTab.Focus();
                 btnConnect.Visible = false;
+                btnReguli.Visible = false;
+               
                 if (player == 2)
                 {
                     _tabla2 = new TablaAlegere(LATIME_ALEGERE, INALTIME_ALEGERE, PIXELIPEPATRAT);
@@ -444,6 +446,20 @@ namespace WindowsFormsApp1
         {
             if(client !=null && client.Connected)
                 client.Close();
+        }
+
+        private void btnReguli_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("How to play \n" +
+                "Player 1:\n" +
+                "Use arrows to move the piece left/right\n" +
+                "Use \"R\" to rotate the piece\n" +
+                "Use \"Space\" to instantly place the piece down (this gives 5 points)\n" +
+                "For every line complete you get 100 points\n" +
+                "Player 2:\n" +
+                "Select next piece by pressing on it\n" +
+                "You can see the current max height of player 1 on the main board" +
+                "The game ends after both players play once","Rules");
         }
     }
 }

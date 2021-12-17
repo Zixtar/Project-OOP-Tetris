@@ -40,6 +40,7 @@ namespace WindowsFormsApp1
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.volumeLabel = new System.Windows.Forms.Label();
             this.panelTab = new WindowsFormsApp1.SelectablePanel();
+            this.btnReguli = new System.Windows.Forms.Button();
             this.panelAlegere.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +52,7 @@ namespace WindowsFormsApp1
             this.panelAlegere.Controls.Add(this.panelPiesa2);
             this.panelAlegere.Controls.Add(this.panelPiesa1);
             this.panelAlegere.Location = new System.Drawing.Point(323, 246);
-            this.panelAlegere.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelAlegere.Margin = new System.Windows.Forms.Padding(4);
             this.panelAlegere.Name = "panelAlegere";
             this.panelAlegere.Size = new System.Drawing.Size(352, 175);
             this.panelAlegere.TabIndex = 2;
@@ -61,7 +62,7 @@ namespace WindowsFormsApp1
             // 
             this.panelPiesa3.Enabled = false;
             this.panelPiesa3.Location = new System.Drawing.Point(252, 46);
-            this.panelPiesa3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelPiesa3.Margin = new System.Windows.Forms.Padding(4);
             this.panelPiesa3.Name = "panelPiesa3";
             this.panelPiesa3.Size = new System.Drawing.Size(64, 68);
             this.panelPiesa3.TabIndex = 2;
@@ -71,7 +72,7 @@ namespace WindowsFormsApp1
             // 
             this.panelPiesa2.Enabled = false;
             this.panelPiesa2.Location = new System.Drawing.Point(155, 42);
-            this.panelPiesa2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelPiesa2.Margin = new System.Windows.Forms.Padding(4);
             this.panelPiesa2.Name = "panelPiesa2";
             this.panelPiesa2.Size = new System.Drawing.Size(71, 71);
             this.panelPiesa2.TabIndex = 1;
@@ -81,7 +82,7 @@ namespace WindowsFormsApp1
             // 
             this.panelPiesa1.Enabled = false;
             this.panelPiesa1.Location = new System.Drawing.Point(63, 50);
-            this.panelPiesa1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelPiesa1.Margin = new System.Windows.Forms.Padding(4);
             this.panelPiesa1.Name = "panelPiesa1";
             this.panelPiesa1.Size = new System.Drawing.Size(72, 64);
             this.panelPiesa1.TabIndex = 0;
@@ -90,7 +91,7 @@ namespace WindowsFormsApp1
             // btnConnect
             // 
             this.btnConnect.Location = new System.Drawing.Point(328, 181);
-            this.btnConnect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnConnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(128, 38);
             this.btnConnect.TabIndex = 3;
@@ -101,7 +102,7 @@ namespace WindowsFormsApp1
             // textConnect
             // 
             this.textConnect.Location = new System.Drawing.Point(328, 124);
-            this.textConnect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textConnect.Margin = new System.Windows.Forms.Padding(4);
             this.textConnect.Name = "textConnect";
             this.textConnect.Size = new System.Drawing.Size(127, 22);
             this.textConnect.TabIndex = 4;
@@ -133,7 +134,7 @@ namespace WindowsFormsApp1
             // 
             this.trackBar1.LargeChange = 10;
             this.trackBar1.Location = new System.Drawing.Point(587, 42);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(4);
             this.trackBar1.Maximum = 40;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(176, 56);
@@ -155,18 +156,29 @@ namespace WindowsFormsApp1
             // 
             this.panelTab.BackColor = System.Drawing.Color.MediumOrchid;
             this.panelTab.Location = new System.Drawing.Point(31, 21);
-            this.panelTab.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelTab.Margin = new System.Windows.Forms.Padding(4);
             this.panelTab.Name = "panelTab";
             this.panelTab.Size = new System.Drawing.Size(263, 385);
             this.panelTab.TabIndex = 9;
             this.panelTab.TabStop = true;
             this.panelTab.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTab_Paint);
             // 
+            // btnReguli
+            // 
+            this.btnReguli.Location = new System.Drawing.Point(523, 181);
+            this.btnReguli.Name = "btnReguli";
+            this.btnReguli.Size = new System.Drawing.Size(133, 38);
+            this.btnReguli.TabIndex = 10;
+            this.btnReguli.Text = "Rules";
+            this.btnReguli.UseVisualStyleBackColor = true;
+            this.btnReguli.Click += new System.EventHandler(this.btnReguli_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 480);
+            this.Controls.Add(this.btnReguli);
             this.Controls.Add(this.panelTab);
             this.Controls.Add(this.volumeLabel);
             this.Controls.Add(this.trackBar1);
@@ -200,6 +212,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label volumeLabel;
         private SelectablePanel panelTab;
+        private System.Windows.Forms.Button btnReguli;
     }
 }
 
