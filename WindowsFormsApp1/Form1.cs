@@ -118,8 +118,9 @@ namespace WindowsFormsApp1
             timer.Start();
         }
 
-        private TablaDeJoc _tabla1;     //variabile ce tin de jocul local
-        private TablaAlegere _tabla2;
+        TablaDeJoc _tabla1;     //variabile ce tin de jocul local
+        TablaAlegere _tabla2;
+        int pieseCazuteContorTimer=0;
         int PIXELIPEPATRAT = 18;  //casplock deoarece era const inainte de adaugarea compatibilitatii pt scaling
         const int LATIME = 10;
         const int INALTIME = 20;
@@ -190,8 +191,12 @@ namespace WindowsFormsApp1
 
                 if (!_tabla1.arePiesa)  // daca nu sunt piese active se spawneaza unul de tip random
                 {
-                    if (timer.Interval > 150)
-                        timer.Interval -= 3;
+                    pieseCazuteContorTimer++;
+                    if (timer.Interval > 200 && pieseCazuteContorTimer == 10)
+                    {
+                        timer.Interval -= 50;
+                        pieseCazuteContorTimer = 0;
+                    }
                     if (ObiectCurent != null && (INALTIME - ObiectCurent.coordCentruY) > _tabla1.CurrentMaxH)
                         _tabla1.CurrentMaxH = INALTIME - ObiectCurent.coordCentruY;
                     StreamWriter scriere = new StreamWriter(DateClient);
@@ -218,6 +223,7 @@ namespace WindowsFormsApp1
                         _tabla1.ModificareTabla(ObiectCurent.MatriceForma, ObiectCurent.coordCentruX, ObiectCurent.coordCentruY, ObiectCurent.latime, ObiectCurent.inaltime);
                     else
                     {                                                       // switch din player 1 in 2
+                        timer.Interval=500;
                         player = 2;
                         scriere.WriteLine("S" + player1Score.Text); ;
                         _tabla2 = new TablaAlegere(LATIME_ALEGERE, INALTIME_ALEGERE, PIXELIPEPATRAT);
